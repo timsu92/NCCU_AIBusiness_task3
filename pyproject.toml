@@ -33,5 +33,7 @@ url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
 [dependency-groups]
-dev = []
+dev = [
+    "kaggle>=1.7.4.5",
+]
 
