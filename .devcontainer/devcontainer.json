@@ -1,6 +1,6 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 {
-  "name": "pytorch_tempelate",
+  "name": "NCCU_AIBusiness_task3",
 
   // ## Base image ##
   // More info: https://containers.dev/guide/dockerfile
@@ -14,7 +14,7 @@
   "overrideCommand": false,
 
   // ## Environment ##
-  "workspaceFolder": "/project/pytorch_tempelate",
+  "workspaceFolder": "/project/NCCU_AIBusiness_task3",
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
 

@@ -1,7 +1,7 @@
 services:
   app:
     environment:
-      - PROJECT_PATH=/project/pytorch_tempelate
+      - PROJECT_PATH=/project/NCCU_AIBusiness_task3
       - TZ=Asia/Taipei
     build:
       context: .
@@ -9,7 +9,7 @@ services:
       # secrets:
       #   - GIT_AUTH_TOKEN
       args:
-        - PROJECT_PATH=/project/pytorch_tempelate
+        - PROJECT_PATH=/project/NCCU_AIBusiness_task3
         - TZ=Asia/Taipei
     shm_size: 6G
     deploy:
