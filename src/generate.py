@@ -80,7 +80,7 @@ def main():
                 )
             if i_batch == 0:
                 visualize_images(
-                    images,
+                    images / 2 + 0.5,
                     [labelNames[pred.item()] for pred in preds],
                     block=False,
                     save=True,
