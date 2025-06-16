@@ -13,7 +13,7 @@ from torch.optim import Optimizer, Adam
 from torch.optim.lr_scheduler import LRScheduler, CosineAnnealingLR
 import wandb
 
-from .utils.logging import Progress, log
+from .utils.logging import job_progress, log
 from .model import Net
 from .eval import evaluate
 from .dataset import FashionMNIST, train_transform, test_transform
@@ -140,8 +140,7 @@ def train(
     val_every: int = 1,
     best_accuracy: float = 0.0,
 ):
-    progress = Progress()
-    with progress:
+    with job_progress() as progress:
         prog_epoch = progress.add_task(
             "Epoch", total=start_epoch + epochs - 1, completed=start_epoch - 1
         )
