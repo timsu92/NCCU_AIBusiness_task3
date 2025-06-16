@@ -61,8 +61,7 @@ train_transform = T.Compose(
         T.ToImage(),
         T.Normalize(mean=[0.5], std=[0.5]),
         T.RandomHorizontalFlip(),
-        T.RandomAffine(degrees=15, translate=(0.1, 0.1), scale=(0.9, 1.1)),
-        T.RandomCrop(size=(28, 28), padding=4),
+        T.RandomAffine(degrees=15, translate=(0.1, 0.1)),
     ]
 )
 
