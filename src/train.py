@@ -24,10 +24,10 @@ def parse_args():
         description="Train a model on the FashionMNIST dataset."
     )
     parser.add_argument(
-        "--batch-size", type=int, default=128, help="Batch size for training"
+        "--batch-size", type=int, default=512, help="Batch size for training"
     )
     parser.add_argument(
-        "--epochs", type=int, default=60, help="Number of epochs to train"
+        "--epochs", type=int, default=150, help="Number of epochs to train"
     )
     parser.add_argument(
         "--learning-rate",
@@ -64,7 +64,7 @@ def parse_args():
     parser.add_argument(
         "--num-workers",
         type=int,
-        default=8,
+        default=14,
         help="Number of worker threads for data loading",
     )
     parser.add_argument(
@@ -282,6 +282,7 @@ def main():
         batch_size=args.batch_size,
         shuffle=True,
         num_workers=args.num_workers,
+        pin_memory=True,
     )
     val_dataset = FashionMNIST(
         mode="val",
@@ -293,6 +294,7 @@ def main():
         batch_size=args.batch_size,
         shuffle=False,
         num_workers=args.num_workers,
+        pin_memory=True,
     )
     train(
         model=model,
