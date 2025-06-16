@@ -135,6 +135,7 @@ def train(
     scheduler: LRScheduler,
     epochs: int,
     result_dir: Path,
+    args: argparse.Namespace,
     start_epoch: int = 1,
     val_every: int = 1,
     best_accuracy: float = 0.0,
@@ -172,27 +173,29 @@ def train(
             log.info(f"[Epoch #{epoch}] Loss: {avg_loss:.4f}, Accuracy: {accuracy:.4f}")
             scheduler.step()
             log.info(f"[Epoch #{epoch}] Learning Rate: {scheduler.get_last_lr()[0]:.6f}")
-            wandb.log(
-                {
-                    "train/loss": avg_loss,
-                    "train/accuracy": accuracy,
-                    "train/learning_rate": scheduler.get_last_lr()[0],
-                },
-                step=epoch,
-            )
+            if not args.no_wandb:
+                wandb.log(
+                    {
+                        "train/loss": avg_loss,
+                        "train/accuracy": accuracy,
+                        "train/learning_rate": scheduler.get_last_lr()[0],
+                    },
+                    step=epoch,
+                )
 
             if epoch % val_every == 0:
                 val_loss, val_accuracy = evaluate(model, val_loader, device, progress)
                 log.info(
                     f"[Epoch #{epoch}] Validation Loss: {val_loss:.4f}, Validation Accuracy: {val_accuracy:.4f}"
                 )
-                wandb.log(
-                    {
-                        "val/loss": val_loss,
-                        "val/accuracy": val_accuracy,
-                    },
-                    step=epoch,
-                )
+                if not args.no_wandb:
+                    wandb.log(
+                        {
+                            "val/loss": val_loss,
+                            "val/accuracy": val_accuracy,
+                        },
+                        step=epoch,
+                    )
                 checkpoint_path = result_dir / f"checkpoint_epoch_{epoch}.pt"
                 checkpoint = Checkpoint(
                     model=model,
@@ -255,6 +258,8 @@ def main():
     if not args.no_wandb:
         run = wandb.init(
             project="NCCU_AIBusiness_task3",
+            id=args.wandb_id,
+            resume="allow",
             config=args,
         )
         args.result_dir /= run.id
@@ -298,6 +303,7 @@ def main():
         scheduler=scheduler,
         epochs=args.epochs,
         result_dir=args.result_dir,
+        args=args,
         start_epoch=epoch,
         best_accuracy=best_accuracy,
     )
