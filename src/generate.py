@@ -86,6 +86,7 @@ def main():
                     save=True,
                 )
             progress.advance(prog_batch)
+        progress.remove_task(prog_batch)
 
     # Close all possiply opened matplotlib figures
     if plt.get_fignums():

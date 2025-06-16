@@ -26,6 +26,7 @@ def evaluate(
             correct += (predicted == labels).sum().item()
             total += labels.size(0)
             progress.advance(prog_batch)
+        progress.remove_task(prog_batch)
     avg_loss = total_loss / total
     accuracy = correct / total
     log.info(f"Evaluation Loss: {avg_loss:.4f}, Accuracy: {accuracy:.4f}")

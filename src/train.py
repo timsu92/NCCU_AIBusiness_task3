@@ -167,6 +167,7 @@ def train(
                 torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
                 optimizer.step()
                 progress.advance(prog_batch)
+            progress.remove_task(prog_batch)
             avg_loss = total_loss / total
             accuracy = correct / total
             log.info(f"[Epoch #{epoch}] Loss: {avg_loss:.4f}, Accuracy: {accuracy:.4f}")
