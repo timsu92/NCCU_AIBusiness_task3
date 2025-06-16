@@ -90,9 +90,6 @@ def main():
 
     # Close all possiply opened matplotlib figures
     if plt.get_fignums():
-        log.info(
-            "Inference completed. Press any key to close the visualization window."
-        )
         input("Inference completed. Press Enter to close the visualization window.")
         plt.close("all")
 
